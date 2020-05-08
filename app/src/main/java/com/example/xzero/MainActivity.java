@@ -2,11 +2,13 @@ package com.example.xzero;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
                             {0,3,6}, {1,4,7}, {2,5,8},
                             {0,4,8}, {2,4,6}};
 
-    public void playertap(View view){
+    public void playertap(View view) throws InterruptedException {
         ImageView img = (ImageView) view;
         int tappedimg = Integer.parseInt(img.getTag().toString());
 
@@ -63,17 +65,41 @@ public class MainActivity extends AppCompatActivity {
                 if (gamestate[winposition[0]] == 0) {
                     winnerstr = "Shinchan won!!";
                     TextView status = findViewById(R.id.msg);
+                    //img.setPaintFlags(status.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
                     status.setText(winnerstr);
-
                 } else {
                     winnerstr = "Pingu Won!!";
                     TextView status = findViewById(R.id.msg);
+                    //img.setPaintFlags(status.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
                     status.setText(winnerstr);
                 }
+//                boolean chk = true;
+//                for (int i = 0; i<9;i++){
+//                    if (gamestate[i] == 2){
+//                        chk = false;
+//                    }
+//                }
+//                if (chk==true){
+//                    Toast.makeText(MainActivity.this,"Its Draw!!! Play again",Toast.LENGTH_SHORT).show();
+//                    gameactive=false;
+//                      }
                 //update who won
                 TextView status = findViewById(R.id.msg);
+                //status.setPaintFlags(status.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
                 status.setText(winnerstr);
             }
+            boolean chk = true;
+            for (int i = 0; i<9;i++){
+                if (gamestate[i] == 2){
+                    chk = false;
+                }
+            }
+            if (chk==true){
+
+                Toast.makeText(MainActivity.this,"Its Draw!!! Play again",Toast.LENGTH_SHORT).show();
+                gameactive=false;
+            }
+
         }
     }
 
